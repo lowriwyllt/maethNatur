@@ -4,6 +4,8 @@ import { Button, View } from "react-native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { NavigationContainer } from "@react-navigation/native";
 import HomeScreen from "./screens/HomeScreen";
+import AllProductsScreen from "./screens/AllProductsScreen";
+import CustomDrawerContent from "./screens/CustomDrawerContent";
 
 function NotificationsScreen({ navigation }) {
   return (
@@ -18,9 +20,27 @@ const Drawer = createDrawerNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Home">
-        <Drawer.Screen name="Home" component={HomeScreen} />
-        <Drawer.Screen name="Notifications" component={NotificationsScreen} />
+      <Drawer.Navigator
+        initialRouteName="Home"
+        screenOptions={{
+          overlayColor: "transparent",
+          drawerStyle: {
+            backgroundColor: "transparent",
+          },
+        }}
+        drawerCon
+        drawerContent={(props) => <CustomDrawerContent {...props} />}
+      >
+        <Drawer.Screen
+          name="Home"
+          component={HomeScreen}
+          inactiveBackgroundColor="white"
+        />
+        <Drawer.Screen
+          name="Products"
+          component={AllProductsScreen}
+          inactiveBackgroundColor="white"
+        />
       </Drawer.Navigator>
     </NavigationContainer>
   );
