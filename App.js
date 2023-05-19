@@ -1,20 +1,47 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import "react-native-gesture-handler";
+import * as React from "react";
+import { Button, View } from "react-native";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import { NavigationContainer } from "@react-navigation/native";
+import HomeScreen from "./screens/HomeScreen";
+import AllProductsScreen from "./screens/AllProductsScreen";
+import CustomDrawerContent from "./screens/CustomDrawerContent";
 
-export default function App() {
+function NotificationsScreen({ navigation }) {
   return (
-    <View style={styles.container}>
-      <Text>Maeth Natur</Text>
-      <StatusBar style="auto" />
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <Button onPress={() => navigation.goBack()} title="Go back home" />
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+const Drawer = createDrawerNavigator();
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Drawer.Navigator
+        initialRouteName="Home"
+        screenOptions={{
+          overlayColor: "transparent",
+          drawerStyle: {
+            backgroundColor: "transparent",
+          },
+        }}
+        drawerCon
+        drawerContent={(props) => <CustomDrawerContent {...props} />}
+      >
+        <Drawer.Screen
+          name="Home"
+          component={HomeScreen}
+          inactiveBackgroundColor="white"
+        />
+        <Drawer.Screen
+          name="Products"
+          component={AllProductsScreen}
+          inactiveBackgroundColor="white"
+        />
+      </Drawer.Navigator>
+    </NavigationContainer>
+  );
+}
