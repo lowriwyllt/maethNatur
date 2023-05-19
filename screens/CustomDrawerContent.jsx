@@ -16,7 +16,7 @@ export default function CustomDrawerContent(props) {
   };
 
   return (
-    <DrawerContentScrollView {...props}>
+    <DrawerContentScrollView {...props} style={styles.container}>
       <DrawerItem
         label={() => null}
         onPress={() => handleImgOnClick("Home")}
@@ -51,6 +51,9 @@ export default function CustomDrawerContent(props) {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    marginTop: 40,
+  },
   leaf: {
     width: 300,
     height: 150,
@@ -68,26 +71,5 @@ const styles = StyleSheet.create({
   button: {
     marginBottom: -20,
     marginTop: -20,
-  },
-  signOutButtonContainer: {
-    position: "absolute",
-    bottom: 20,
-    backgroundColor: "green",
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 5,
-    paddingTop: 10,
-    paddingBottom: 10,
-    paddingLeft: 15,
-    paddingRight: 15,
-    alignSelf: "center",
-  },
-  signOutButton: {
-    color: "white",
-    fontWeight: "700",
-    textAlign: "center",
-  },
-  container: {
-    flex: 1,
   },
 });
