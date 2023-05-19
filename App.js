@@ -1,4 +1,5 @@
 import "react-native-gesture-handler";
+import * as Linking from "expo-linking";
 import * as React from "react";
 import { Button, View } from "react-native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
@@ -7,19 +8,17 @@ import HomeScreen from "./screens/HomeScreen";
 import AllProductsScreen from "./screens/AllProductsScreen";
 import CustomDrawerContent from "./screens/CustomDrawerContent";
 
-function NotificationsScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Button onPress={() => navigation.goBack()} title="Go back home" />
-    </View>
-  );
-}
+const prefix = Linking.createURL("/");
 
 const Drawer = createDrawerNavigator();
 
 export default function App() {
+  const linking = {
+    prefixes: [prefix],
+  };
+
   return (
-    <NavigationContainer>
+    <NavigationContainer linking={linking} fallback={<Text>Loading...</Text>}>
       <Drawer.Navigator
         initialRouteName="Home"
         screenOptions={{
