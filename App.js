@@ -7,6 +7,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import HomeScreen from "./screens/HomeScreen";
 import AllProductsScreen from "./screens/AllProductsScreen";
 import CustomDrawerContent from "./screens/CustomDrawerContent";
+import InformationScreen from "./screens/InformationScreen";
 
 const prefix = Linking.createURL("/");
 
@@ -38,6 +39,11 @@ export default function App() {
         <Drawer.Screen
           name="Products"
           component={AllProductsScreen}
+          inactiveBackgroundColor="white"
+        />
+        <Drawer.Screen
+          name="Information"
+          component={InformationScreen}
           inactiveBackgroundColor="white"
         />
       </Drawer.Navigator>
