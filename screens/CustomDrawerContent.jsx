@@ -46,6 +46,22 @@ export default function CustomDrawerContent(props) {
           </TouchableOpacity>
         )}
       ></DrawerItem>
+      <DrawerItem
+        label={() => null}
+        onPress={() => handleImgOnClick("Information")}
+        icon={() => (
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => handleImgOnClick("Information")}
+          >
+            <Image
+              source={require("../assets/navbarItem.png")}
+              style={styles.leaf}
+            />
+            <Text style={styles.leafText}>Information</Text>
+          </TouchableOpacity>
+        )}
+      ></DrawerItem>
     </DrawerContentScrollView>
   );
 }
