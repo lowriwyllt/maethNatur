@@ -12,9 +12,9 @@ const Stockists = () => {
   }, []);
 
   return (
-    <View>
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <Text>Stockists</Text>
-      <View>
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         {stockists.map((stockist) => {
           return <StockistCard key={stockist.name} stockist={stockist} />;
         })}

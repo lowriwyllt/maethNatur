@@ -7,7 +7,7 @@ export default function InformationScreen({ navigation }) {
       <Text style={{ fontWeight: "bold" }}>Contact Information</Text>
       <Text>Location: Blaenau Ffestiniog</Text>
       <Text>
-        Email:{" "}
+        Email:
         <Text
           onPress={() => Linking.openURL("mailto:maethnatur@outlook.com")}
           style={{ color: "blue" }}
