@@ -15,3 +15,17 @@ export const getStockists = async () => {
     console.log(err);
   }
 };
+
+export const getAllProducts = async () => {
+  const result = [];
+  try {
+    console.log("inside getAllProducts");
+    const allProducts = await getDocs(collection(db, "products"));
+    allProducts.forEach((doc) => {
+      result.push(doc.data());
+    });
+    return result;
+  } catch (err) {
+    console.log(err);
+  }
+};
