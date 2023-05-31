@@ -1,4 +1,5 @@
 import { Text, View, Linking, Image, TouchableOpacity } from "react-native-web";
+import Stockists from "./Stockists";
 
 export default function InformationScreen({ navigation }) {
   return (
@@ -6,7 +7,7 @@ export default function InformationScreen({ navigation }) {
       <Text style={{ fontWeight: "bold" }}>Contact Information</Text>
       <Text>Location: Blaenau Ffestiniog</Text>
       <Text>
-        Email:{" "}
+        Email:
         <Text
           onPress={() => Linking.openURL("mailto:maethnatur@outlook.com")}
           style={{ color: "blue" }}
@@ -58,6 +59,7 @@ export default function InformationScreen({ navigation }) {
           />
         </TouchableOpacity>
       </View>
+      <Stockists />
     </View>
   );
 }
