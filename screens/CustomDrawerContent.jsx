@@ -1,14 +1,6 @@
-import { DrawerItemList } from "@react-navigation/drawer";
-import {
-  Button,
-  Image,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native-web";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native-web";
 import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
+import LeafView from "./LeafView";
 
 export default function CustomDrawerContent(props) {
   const handleImgOnClick = (screenName) => {
@@ -18,48 +10,39 @@ export default function CustomDrawerContent(props) {
   return (
     <DrawerContentScrollView {...props} style={styles.container}>
       <DrawerItem
+        style={styles.drawerItem}
         label={() => null}
         onPress={() => handleImgOnClick("Home")}
         icon={() => (
-          <TouchableOpacity onPress={() => handleImgOnClick("Home")}>
-            <Image
-              source={require("../assets/navbarItem.png")}
-              style={styles.leaf}
-            />
-            <Text style={styles.leafText}>Home</Text>
-          </TouchableOpacity>
+          <LeafView
+            style={styles.leaf}
+            page="Home"
+            handleImgOnClick={handleImgOnClick}
+          />
         )}
       ></DrawerItem>
       <DrawerItem
+        style={styles.drawerItem}
         label={() => null}
         onPress={() => handleImgOnClick("Products")}
         icon={() => (
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => handleImgOnClick("Products")}
-          >
-            <Image
-              source={require("../assets/navbarItem.png")}
-              style={styles.leaf}
-            />
-            <Text style={styles.leafText}>Products</Text>
-          </TouchableOpacity>
+          <LeafView
+            style={styles.leaf}
+            page="Products"
+            handleImgOnClick={handleImgOnClick}
+          />
         )}
       ></DrawerItem>
       <DrawerItem
+        style={styles.drawerItem}
         label={() => null}
         onPress={() => handleImgOnClick("Information")}
         icon={() => (
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => handleImgOnClick("Information")}
-          >
-            <Image
-              source={require("../assets/navbarItem.png")}
-              style={styles.leaf}
-            />
-            <Text style={styles.leafText}>Information</Text>
-          </TouchableOpacity>
+          <LeafView
+            style={styles.leaf}
+            page="Information"
+            handleImgOnClick={handleImgOnClick}
+          />
         )}
       ></DrawerItem>
     </DrawerContentScrollView>
@@ -67,25 +50,24 @@ export default function CustomDrawerContent(props) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    marginTop: 40,
-  },
-  leaf: {
-    width: 300,
+  drawerItem: {
     height: 150,
+  },
+  container: {
+    marginTop: 50,
     position: "relative",
     left: -30,
   },
   leafText: {
     position: "relative",
-    top: -140,
+    top: -320,
     left: 80,
     fontSize: 30,
-    color: "white",
+    color: "black",
     transform: [{ rotate: "340deg" }],
   },
   button: {
-    marginBottom: -20,
-    marginTop: -20,
+    flexDirection: "row",
+    alignItems: "center",
   },
 });
