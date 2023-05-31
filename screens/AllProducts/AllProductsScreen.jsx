@@ -34,16 +34,18 @@ export default function AllProductsScreen({ navigation }) {
   }, [filters]);
 
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+    <View style={{ flex: 1, flexDirection: "row" }}>
       <Filters filters={filters} setFilters={setFilters} />
-      <Text>Products</Text>
-      {isLoading ? <Text>Loading...</Text> : null}
-      {allProducts.length === 0 && !isLoading ? (
-        <Text>No products found try ajusting the filters</Text>
-      ) : null}
-      {allProducts.map((product) => {
-        return <ProductCard key={product.name} product={product} />;
-      })}
+      <View style={{ flex: 1, padding: 10 }}>
+        <Text>Products</Text>
+        {isLoading ? <Text>Loading...</Text> : null}
+        {allProducts.length === 0 && !isLoading ? (
+          <Text>No products found try ajusting the filters</Text>
+        ) : null}
+        {allProducts.map((product) => {
+          return <ProductCard key={product.name} product={product} />;
+        })}
+      </View>
     </View>
   );
 }
