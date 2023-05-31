@@ -5,7 +5,7 @@ import { Button, View } from "react-native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { NavigationContainer } from "@react-navigation/native";
 import HomeScreen from "./screens/Home/HomeScreen";
-import AllProductsScreen from "./screens/AllProductsScreen";
+import AllProductsScreen from "./screens/AllProducts/AllProductsScreen";
 import CustomDrawerContent from "./screens/Navbar/CustomDrawerContent";
 import InformationScreen from "./screens/Information/InformationScreen";
 
