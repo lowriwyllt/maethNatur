@@ -1,5 +1,11 @@
 import { app } from "../firebase.config";
-import { collection, getDocs, getFirestore } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  getFirestore,
+  query,
+  where,
+} from "firebase/firestore";
 const db = getFirestore(app);
 
 export const getStockists = async () => {
@@ -16,15 +22,51 @@ export const getStockists = async () => {
   }
 };
 
-export const getAllProducts = async () => {
+export const getAllProducts = async (type, plant, minPrice, maxPrice) => {
   const result = [];
+  const types = [];
+  const plants = [];
   try {
     console.log("inside getAllProducts");
-    const allProducts = await getDocs(collection(db, "products"));
+
+    const productsRef = collection(db, "products");
+    let q = query(
+      productsRef,
+      where("price", ">=", minPrice),
+      where("price", "<=", maxPrice)
+    );
+    if (type && plant && minPrice && maxPrice) {
+      q = query(
+        productsRef,
+        where("type", "==", type),
+        where("plants", "array-contains", plant),
+        where("price", ">=", minPrice),
+        where("price", "<=", maxPrice)
+      );
+    } else if (type) {
+      q = query(
+        productsRef,
+        where("type", "==", type),
+        where("price", ">=", minPrice),
+        where("price", "<=", maxPrice)
+      );
+    } else if (plant) {
+      q = query(
+        productsRef,
+        where("plants", "array-contains", plant),
+        where("price", ">=", minPrice),
+        where("price", "<=", maxPrice)
+      );
+    }
+    const allProducts = await getDocs(q);
     allProducts.forEach((doc) => {
       result.push(doc.data());
+      if (doc.data().type) types.push(doc.data().type);
+      if (doc.data().plants) plants.push(doc.data().plants);
     });
-    return result;
+
+    const resultsPlants = [...new Set(plants.flat(Infinity))];
+    return { result, types, resultsPlants };
   } catch (err) {
     console.log(err);
   }
