@@ -1,4 +1,5 @@
 import { Text, View, Linking, Image, TouchableOpacity } from "react-native-web";
+import Stockists from "./Stockists";
 
 export default function InformationScreen({ navigation }) {
   return (
@@ -58,6 +59,7 @@ export default function InformationScreen({ navigation }) {
           />
         </TouchableOpacity>
       </View>
+      <Stockists />
     </View>
   );
 }

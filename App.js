@@ -4,10 +4,10 @@ import * as React from "react";
 import { Button, View } from "react-native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { NavigationContainer } from "@react-navigation/native";
-import HomeScreen from "./screens/HomeScreen";
+import HomeScreen from "./screens/Home/HomeScreen";
 import AllProductsScreen from "./screens/AllProductsScreen";
-import CustomDrawerContent from "./screens/CustomDrawerContent";
-import InformationScreen from "./screens/InformationScreen";
+import CustomDrawerContent from "./screens/Navbar/CustomDrawerContent";
+import InformationScreen from "./screens/Information/InformationScreen";
 
 const prefix = Linking.createURL("/");
 
