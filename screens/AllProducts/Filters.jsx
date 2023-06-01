@@ -41,11 +41,9 @@ export default function Filters({ filters, setFilters }) {
               width: "100%",
               height: 10,
               borderRadius: 5,
-              background: `linear-gradient(to right, black 0%, black ${fillOffset}%, green ${fillOffset}%, green ${
+              background: `linear-gradient(to right, white 0%, white ${fillOffset}%, green ${fillOffset}%, green ${
                 fillOffset + fillPercentage
-              }%, black ${fillOffset + fillPercentage}%, black 100%)`,
-
-              backgroundRepeat: "no-repeat",
+              }%, white ${fillOffset + fillPercentage}%, white 100%)`,
               outline: "none",
             }}
           />
@@ -70,10 +68,9 @@ export default function Filters({ filters, setFilters }) {
               width: "100%",
               height: 10,
               borderRadius: 5,
-              background: `linear-gradient(to right, black 0%, black ${fillOffset}%, green ${fillOffset}%, green ${
+              background: `linear-gradient(to right, white 0%, white ${fillOffset}%, green ${fillOffset}%, green ${
                 fillOffset + fillPercentage
-              }%, black ${fillOffset + fillPercentage}%, black 100%)`,
-              backgroundRepeat: "no-repeat",
+              }%, white ${fillOffset + fillPercentage}%, white 100%)`,
               outline: "none",
             }}
           />
@@ -85,6 +82,20 @@ export default function Filters({ filters, setFilters }) {
           />
         </View>
         {sliderWarning ? <Text>{sliderWarning}</Text> : null}
+
+        <style>
+          {`
+          input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background-color: black;
+            border-radius: 50%;
+            cursor: pointer;
+          }
+        `}
+        </style>
       </View>
     </View>
   );
