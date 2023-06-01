@@ -6,6 +6,8 @@ import Filters from "./Filters";
 
 export default function AllProductsScreen({ navigation }) {
   const [allProducts, setAllProducts] = useState([]);
+  const [allTypes, setAllTypes] = useState([]);
+  const [allPlants, setAllPlants] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [filters, setFilters] = useState({
     type: undefined,
@@ -16,6 +18,28 @@ export default function AllProductsScreen({ navigation }) {
 
   useEffect(() => {
     setIsLoading(true);
+    getAllProducts(
+      filters.type,
+      filters.plant,
+      filters.minPrice,
+      filters.maxPrice
+    )
+      .then((response) => {
+        setAllProducts(response.result);
+        setAllPlants(response.resultsPlants);
+        setAllTypes(response.types);
+        console.log(response);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsLoading(false);
+      });
+  }, []);
+
+  useEffect(() => {
+    setIsLoading(true);
+    console.log(filters);
     getAllProducts(
       filters.type,
       filters.plant,
@@ -35,7 +59,12 @@ export default function AllProductsScreen({ navigation }) {
 
   return (
     <View style={{ flex: 1, flexDirection: "row" }}>
-      <Filters filters={filters} setFilters={setFilters} />
+      <Filters
+        filters={filters}
+        setFilters={setFilters}
+        allTypes={allTypes}
+        allPlants={allPlants}
+      />
       <View style={{ flex: 1, padding: 10 }}>
         <Text>Products</Text>
         {isLoading ? <Text>Loading...</Text> : null}

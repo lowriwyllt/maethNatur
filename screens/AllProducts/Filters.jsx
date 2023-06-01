@@ -2,7 +2,7 @@ import { Text, TextInput, View } from "react-native-web";
 import { toPounds } from "../../utils/utilFunctions";
 import { useState } from "react";
 
-export default function Filters({ filters, setFilters }) {
+export default function Filters({ filters, setFilters, allTypes, allPlants }) {
   const [sliderWarning, setSliderWarning] = useState("");
 
   const handleRangeChange = (event, index) => {
@@ -20,8 +20,24 @@ export default function Filters({ filters, setFilters }) {
     }
   };
 
+  const handleTypeChange = (event) => {
+    console.log(event);
+    const newValues = { ...filters };
+    newValues["type"] = event.target.value;
+    setFilters(newValues);
+  };
+
+  const handlePlantChange = (event) => {
+    console.log(event);
+    const newValues = { ...filters };
+    newValues["plant"] = event.target.value;
+    setFilters(newValues);
+  };
+
   const fillPercentage = ((filters.maxPrice - filters.minPrice) / 20) * 100;
   const fillOffset = (filters.minPrice / 20) * 100;
+
+  console.log(filters);
 
   return (
     <View style={{ width: "10%", padding: 10 }}>
@@ -96,6 +112,56 @@ export default function Filters({ filters, setFilters }) {
           }
         `}
         </style>
+      </View>
+      <View style={{ marginVertical: 20 }}>
+        <Text style={{ fontWeight: "bold" }}>Type</Text>
+        <label>
+          <input
+            type="radio"
+            value={undefined}
+            checked={filters.type === undefined || filters.type === ""}
+            onChange={handleTypeChange}
+          />
+          All
+        </label>
+        {allTypes.map((type) => {
+          return (
+            <label key={type}>
+              <input
+                type="radio"
+                value={type}
+                checked={filters.type === type}
+                onChange={handleTypeChange}
+              />
+              {type}
+            </label>
+          );
+        })}
+      </View>
+      <View style={{ marginVertical: 20 }}>
+        <Text style={{ fontWeight: "bold" }}>Plants</Text>
+        <label>
+          <input
+            type="radio"
+            value={undefined}
+            checked={filters.plant === undefined || filters.plant === ""}
+            onChange={handlePlantChange}
+          />
+          All
+        </label>
+        {allPlants.map((plant) => {
+          return (
+            <label key={plant}>
+              <input
+                type="radio"
+                value={plant}
+                checked={filters.plant === plant}
+                onChange={handlePlantChange}
+              />
+              {plant}
+            </label>
+          );
+        })}
       </View>
     </View>
   );
