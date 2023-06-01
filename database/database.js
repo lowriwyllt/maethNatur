@@ -35,7 +35,7 @@ export const getAllProducts = async (type, plant, minPrice, maxPrice) => {
       where("price", ">=", minPrice),
       where("price", "<=", maxPrice)
     );
-    if (type && plant && minPrice && maxPrice) {
+    if (type && plant && (minPrice || minPrice === 0) && maxPrice) {
       q = query(
         productsRef,
         where("type", "==", type),
