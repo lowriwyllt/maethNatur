@@ -1,9 +1,24 @@
 import { Text, TextInput, View } from "react-native-web";
 import { toPounds } from "../../utils/utilFunctions";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigation } from "@react-navigation/core";
 
 export default function Filters({ filters, setFilters, allTypes, allPlants }) {
   const [sliderWarning, setSliderWarning] = useState("");
+
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    const { type, plant, minPrice, maxPrice } = filters;
+    const params = {
+      type: type || undefined,
+      plant: plant || undefined,
+      minPrice: minPrice !== 0 ? String(minPrice) : undefined,
+      maxPrice: maxPrice !== 20 ? String(maxPrice) : undefined,
+    };
+
+    navigation.setParams(params);
+  }, [filters]);
 
   const handleRangeChange = (event, index) => {
     const { value } = event.target;
