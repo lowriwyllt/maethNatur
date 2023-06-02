@@ -2,6 +2,7 @@ import { Text, View } from "react-native-web";
 import StockistCard from "./StockistCard";
 import { getStockists } from "../../database/database";
 import { useState, useEffect } from "react";
+import { InformationStyling } from "../../Styling/Information.Styling";
 
 const Stockists = () => {
   const [stockists, setStockists] = useState([]);
@@ -12,9 +13,9 @@ const Stockists = () => {
   }, []);
 
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>Stockists</Text>
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+    <View style={InformationStyling.section}>
+      <Text style={InformationStyling.title}>Stockists</Text>
+      <View>
         {stockists.map((stockist) => {
           return <StockistCard key={stockist.name} stockist={stockist} />;
         })}

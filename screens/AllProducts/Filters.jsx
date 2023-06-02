@@ -2,6 +2,8 @@ import { Text, TextInput, View } from "react-native-web";
 import { toPounds } from "../../utils/utilFunctions";
 import { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/core";
+import { AllProductsStyling } from "../../Styling/AllProducts.Styling";
+import { theme } from "../../Styling/theme";
 
 export default function Filters({ filters, setFilters, allTypes, allPlants }) {
   const [sliderWarning, setSliderWarning] = useState("");
@@ -55,65 +57,74 @@ export default function Filters({ filters, setFilters, allTypes, allPlants }) {
   console.log(filters);
 
   return (
-    <View style={{ width: "10%", padding: 10 }}>
-      <View style={{ marginVertical: 20 }}>
-        <Text style={{ fontWeight: "bold" }}>Pricing</Text>
+    <View style={AllProductsStyling.filterContainer}>
+      <View>
+        <Text style={AllProductsStyling.title}>Pricing</Text>
         <View>
-          <Text>Minimum price: {toPounds(filters.minPrice)}</Text>
-          <input
-            type="range"
-            min={0}
-            max={20}
-            step={0.5}
-            value={filters.minPrice}
-            onChange={(event) => handleRangeChange(event, "minPrice")}
-            style={{
-              WebkitAppearance: "none",
-              width: "100%",
-              height: 10,
-              borderRadius: 5,
-              background: `linear-gradient(to right, white 0%, white ${fillOffset}%, green ${fillOffset}%, green ${
-                fillOffset + fillPercentage
-              }%, white ${fillOffset + fillPercentage}%, white 100%)`,
-              outline: "none",
-            }}
-          />
-          <TextInput
-            style={{ width: "100%" }}
-            keyboardType="numeric"
-            value={String(filters.minPrice)}
-            onChange={(event) => handleRangeChange(event, "minPrice")}
-          />
+          <Text>
+            Minimum price: £
+            <TextInput
+              keyboardType="numeric"
+              value={parseFloat(filters.minPrice).toFixed(2)}
+              onChange={(event) => handleRangeChange(event, "minPrice")}
+            />
+          </Text>
+          <View style={AllProductsStyling.smallVerticalMargin}>
+            <input
+              type="range"
+              min={0}
+              max={20}
+              step={0.5}
+              value={filters.minPrice}
+              onChange={(event) => handleRangeChange(event, "minPrice")}
+              style={{
+                WebkitAppearance: "none",
+                width: "100%",
+                height: 10,
+                borderRadius: 5,
+                background: `linear-gradient(to right, white 0%, white ${fillOffset}%, ${
+                  theme.brightGreen
+                } ${fillOffset}%, ${theme.brightGreen} ${
+                  fillOffset + fillPercentage
+                }%, white ${fillOffset + fillPercentage}%, white 100%)`,
+                outline: "none",
+              }}
+            />
+          </View>
         </View>
         <View>
-          <Text>Maximum price: {toPounds(filters.maxPrice)}</Text>
-          <input
-            type="range"
-            min={0}
-            max={20}
-            step={0.5}
-            value={filters.maxPrice}
-            onChange={(event) => handleRangeChange(event, "maxPrice")}
-            style={{
-              WebkitAppearance: "none",
-              width: "100%",
-              height: 10,
-              borderRadius: 5,
-              background: `linear-gradient(to right, white 0%, white ${fillOffset}%, green ${fillOffset}%, green ${
-                fillOffset + fillPercentage
-              }%, white ${fillOffset + fillPercentage}%, white 100%)`,
-              outline: "none",
-            }}
-          />
-          <TextInput
-            style={{ width: "100%" }}
-            keyboardType="numeric"
-            value={String(filters.maxPrice)}
-            onChange={(event) => handleRangeChange(event, "maxPrice")}
-          />
+          <Text>
+            Maximum price: £
+            <TextInput
+              keyboardType="numeric"
+              value={parseFloat(filters.maxPrice).toFixed(2)}
+              onChange={(event) => handleRangeChange(event, "maxPrice")}
+            />
+          </Text>
+          <View style={AllProductsStyling.smallVerticalMargin}>
+            <input
+              type="range"
+              min={0}
+              max={20}
+              step={0.5}
+              value={filters.maxPrice}
+              onChange={(event) => handleRangeChange(event, "maxPrice")}
+              style={{
+                WebkitAppearance: "none",
+                width: "100%",
+                height: 10,
+                borderRadius: 5,
+                background: `linear-gradient(to right, white 0%, white ${fillOffset}%, ${
+                  theme.brightGreen
+                } ${fillOffset}%, ${theme.brightGreen} ${
+                  fillOffset + fillPercentage
+                }%, white ${fillOffset + fillPercentage}%, white 100%)`,
+                outline: "none",
+              }}
+            />
+          </View>
         </View>
         {sliderWarning ? <Text>{sliderWarning}</Text> : null}
-
         <style>
           {`
           input[type="range"]::-webkit-slider-thumb {
@@ -128,8 +139,8 @@ export default function Filters({ filters, setFilters, allTypes, allPlants }) {
         `}
         </style>
       </View>
-      <View style={{ marginVertical: 20 }}>
-        <Text style={{ fontWeight: "bold" }}>Type</Text>
+      <View style={AllProductsStyling.section}>
+        <Text style={AllProductsStyling.title}>Type</Text>
         <label>
           <input
             type="radio"
@@ -153,8 +164,8 @@ export default function Filters({ filters, setFilters, allTypes, allPlants }) {
           );
         })}
       </View>
-      <View style={{ marginVertical: 20 }}>
-        <Text style={{ fontWeight: "bold" }}>Plants</Text>
+      <View style={AllProductsStyling.section}>
+        <Text style={AllProductsStyling.title}>Plants</Text>
         <label>
           <input
             type="radio"
