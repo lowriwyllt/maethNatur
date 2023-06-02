@@ -30,4 +30,9 @@ export const InformationStyling = StyleSheet.create({
     height: 50,
     margin: 10,
   },
+  bottomMargin: {
+    marginBottom: 20,
+    display: "flex",
+    alignItems: "center",
+  },
 });
