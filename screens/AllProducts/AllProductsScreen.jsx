@@ -3,17 +3,19 @@ import { getAllProducts } from "../../database/database";
 import { useState, useEffect } from "react";
 import ProductCard from "./ProductCard";
 import Filters from "./Filters";
+import { useRoute } from "@react-navigation/core";
 
 export default function AllProductsScreen({ navigation }) {
+  const route = useRoute();
   const [allProducts, setAllProducts] = useState([]);
   const [allTypes, setAllTypes] = useState([]);
   const [allPlants, setAllPlants] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [filters, setFilters] = useState({
-    type: undefined,
-    plant: undefined,
-    minPrice: 0,
-    maxPrice: 20,
+    type: route.params?.type,
+    plant: route.params?.plant,
+    minPrice: route.params?.minPrice ? +route.params.minPrice : 0,
+    maxPrice: route.params?.maxPrice ? +route.params.maxPrice : 20,
   });
 
   useEffect(() => {
