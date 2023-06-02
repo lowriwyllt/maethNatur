@@ -1,19 +1,20 @@
 import { Linking, StyleSheet, Text, View } from "react-native-web";
+import { InformationStyling } from "../../Styling/Information.Styling";
 
 const StockistCard = ({ stockist }) => {
   return (
-    <View style={styles.container}>
-      <Text>{stockist.name}</Text>
+    <View style={{ marginVertical: 20 }}>
+      <Text style={InformationStyling.title}>{stockist.name}</Text>
       <Text>{stockist.address}</Text>
       <Text
         onPress={() => Linking.openURL(`tel:${stockist.phone}`)}
-        style={{ color: "blue" }}
+        style={InformationStyling.link}
       >
         {stockist.phone}
       </Text>
       <Text
         onPress={() => Linking.openURL(`mailto:${stockist.email}`)}
-        style={{ color: "blue" }}
+        style={InformationStyling.link}
       >
         {stockist.email}
       </Text>
@@ -21,12 +22,5 @@ const StockistCard = ({ stockist }) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    width: "90%",
-    margin: 20,
-  },
-});
 
 export default StockistCard;
