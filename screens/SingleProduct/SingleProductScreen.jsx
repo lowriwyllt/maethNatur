@@ -1,4 +1,10 @@
-import { Image, StyleSheet, Text } from "react-native-web";
+import {
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native-web";
 import { useRoute, useNavigation } from "@react-navigation/core";
 import { getProductByName } from "../../database/database";
 import { useEffect, useState, useLayoutEffect } from "react";
@@ -27,6 +33,10 @@ export default function SingleProductScreen() {
       });
   }, [productName]);
 
+  const handleEtsyPress = () => {
+    window.open(product.etsy, "_blank");
+  };
+
   return (
     <>
       {isLoading ? (
@@ -50,6 +60,15 @@ export default function SingleProductScreen() {
             return <Text key={plant}>{plant}</Text>;
           })}
           <Text>{toPounds(product.price)}</Text>
+
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              handleEtsyPress();
+            }}
+          >
+            <Text>Buy from Etsy!</Text>
+          </TouchableOpacity>
         </>
       )}
     </>
@@ -60,5 +79,11 @@ const styles = StyleSheet.create({
   img: {
     height: 50,
     width: 50,
+  },
+  button: {
+    backgroundColor: "green",
+    padding: 12,
+    alignSelf: "flex-start",
+    borderRadius: 20,
   },
 });
