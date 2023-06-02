@@ -1,9 +1,10 @@
-import { Text, View } from "react-native-web";
+import { ScrollView, Text, View } from "react-native-web";
 import { getAllProducts } from "../../database/database";
 import { useState, useEffect } from "react";
 import ProductCard from "./ProductCard";
 import Filters from "./Filters";
 import { useRoute } from "@react-navigation/core";
+import { AllProductsStyling } from "../../Styling/AllProducts.Styling";
 
 export default function AllProductsScreen({ navigation }) {
   const route = useRoute();
@@ -20,12 +21,7 @@ export default function AllProductsScreen({ navigation }) {
 
   useEffect(() => {
     setIsLoading(true);
-    getAllProducts(
-      filters.type,
-      filters.plant,
-      filters.minPrice,
-      filters.maxPrice
-    )
+    getAllProducts(undefined, undefined, 0, 20)
       .then((response) => {
         setAllProducts(response.result);
         setAllPlants(response.resultsPlants);
@@ -60,15 +56,14 @@ export default function AllProductsScreen({ navigation }) {
   }, [filters]);
 
   return (
-    <View style={{ flex: 1, flexDirection: "row" }}>
+    <View style={AllProductsStyling.page}>
       <Filters
         filters={filters}
         setFilters={setFilters}
         allTypes={allTypes}
         allPlants={allPlants}
       />
-      <View style={{ flex: 1, padding: 10 }}>
-        <Text>Products</Text>
+      <View style={AllProductsStyling.allProductsContainer}>
         {isLoading ? <Text>Loading...</Text> : null}
         {allProducts.length === 0 && !isLoading ? (
           <Text>No products found try ajusting the filters</Text>

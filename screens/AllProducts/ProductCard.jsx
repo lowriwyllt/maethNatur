@@ -7,6 +7,7 @@ import {
 } from "react-native-web";
 import { toPounds } from "../../utils/utilFunctions";
 import { useNavigation } from "@react-navigation/native";
+import { AllProductsStyling } from "../../Styling/AllProducts.Styling";
 
 export default function ProductCard({ product }) {
   const navigation = useNavigation();
@@ -18,32 +19,15 @@ export default function ProductCard({ product }) {
   console.log("img", product.img[0]);
   return (
     <TouchableOpacity onPress={handleProductPress}>
-      <View style={styles.container}>
-        <Text style={styles.name}>{product.name}</Text>
+      <View style={AllProductsStyling.productCard}>
+        <Text style={AllProductsStyling.title}>{product.name}</Text>
         <Image
           alt={`Image of ${product.name}`}
           source={product.img[0]}
-          style={styles.img}
+          style={AllProductsStyling.productImg}
         />
         <Text>{toPounds(product.price)}</Text>
       </View>
     </TouchableOpacity>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    width: 100,
-    height: 100,
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  img: {
-    height: 50,
-    width: 50,
-  },
-  name: {
-    textAlign: "center",
-  },
-});
