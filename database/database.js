@@ -1,6 +1,7 @@
 import { app } from "../firebase.config";
 import {
   collection,
+  getDoc,
   getDocs,
   getFirestore,
   query,
@@ -67,6 +68,25 @@ export const getAllProducts = async (type, plant, minPrice, maxPrice) => {
 
     const resultsPlants = [...new Set(plants.flat(Infinity))];
     return { result, types, resultsPlants };
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const getProductByName = async (name) => {
+  const result = [];
+  try {
+    console.log("inside getProductByName");
+
+    const productsRef = collection(db, "products");
+    let q = query(productsRef, where("name", "==", name));
+
+    const product = await getDocs(q);
+    const result = [];
+    product.forEach((doc) => {
+      result.push(doc.data());
+    });
+    return result[0];
   } catch (err) {
     console.log(err);
   }
