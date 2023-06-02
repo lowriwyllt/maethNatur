@@ -1,4 +1,5 @@
 import {
+  FlatList,
   Image,
   StyleSheet,
   Text,
@@ -9,6 +10,7 @@ import { useRoute, useNavigation } from "@react-navigation/core";
 import { getProductByName } from "../../database/database";
 import { useEffect, useState, useLayoutEffect } from "react";
 import { toPounds } from "../../utils/utilFunctions";
+import { SingleProductStyling } from "../../Styling/SingleProduct.Styling";
 
 export default function SingleProductScreen() {
   const [product, setProduct] = useState({});
@@ -42,48 +44,47 @@ export default function SingleProductScreen() {
       {isLoading ? (
         <Text>Loading...</Text>
       ) : (
-        <>
-          <Text>{product.name}</Text>
-          {product.img?.map((image) => {
-            return (
-              <Image
-                key={image}
-                alt={`Image of ${product.name}`}
-                source={image}
-                style={styles.img}
-              />
-            );
-          })}
-          <Text>{product.description}</Text>
-          <Text>{product.type}</Text>
-          {product.plants?.map((plant) => {
-            return <Text key={plant}>{plant}</Text>;
-          })}
-          <Text>{toPounds(product.price)}</Text>
+        <View style={SingleProductStyling.page}>
+          <View style={SingleProductStyling.imgContainer}>
+            {product.img?.map((image) => {
+              return (
+                <Image
+                  key={image}
+                  alt={`Image of ${product.name}`}
+                  source={image}
+                  style={SingleProductStyling.productImg}
+                />
+              );
+            })}
+          </View>
+          <View style={SingleProductStyling.verticalMargin}>
+            <Text>Description</Text>
+            <Text>{product.description}</Text>
+          </View>
+          <View style={SingleProductStyling.verticalMargin}>
+            <Text>Type: {product.type}</Text>
+          </View>
+          <View style={SingleProductStyling.verticalMargin}>
+            <Text>Plants</Text>
+            <FlatList
+              data={product.plants}
+              renderItem={({ item }) => <Text>- {item}</Text>}
+            />
+          </View>
+          <View style={SingleProductStyling.verticalMargin}>
+            <Text>{toPounds(product.price)}</Text>
+          </View>
 
           <TouchableOpacity
-            style={styles.button}
+            style={SingleProductStyling.etsyButton}
             onPress={() => {
               handleEtsyPress();
             }}
           >
             <Text>Buy from Etsy!</Text>
           </TouchableOpacity>
-        </>
+        </View>
       )}
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  img: {
-    height: 50,
-    width: 50,
-  },
-  button: {
-    backgroundColor: "green",
-    padding: 12,
-    alignSelf: "flex-start",
-    borderRadius: 20,
-  },
-});
