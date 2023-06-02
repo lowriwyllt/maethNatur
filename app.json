@@ -22,7 +22,12 @@
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/favicon.png",
+      "config": {
+        "navigations": {
+          "pathname": "path"
+        }
+      }
     },
     "scheme": "maethNatur"
   }
