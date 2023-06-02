@@ -1,16 +1,33 @@
-import { Image, StyleSheet, Text, View } from "react-native-web";
+import {
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native-web";
+import { toPounds } from "../../utils/utilFunctions";
+import { useNavigation } from "@react-navigation/native";
 
 export default function ProductCard({ product }) {
+  const navigation = useNavigation();
+
+  const handleProductPress = () => {
+    navigation.navigate("SingleProduct", { query: product.name });
+  };
+
   console.log("img", product.img[0]);
   return (
-    <View style={styles.container}>
-      <Text style={styles.name}>{product.name}</Text>
-      <Image
-        alt={`Image of ${product.name}`}
-        source={product.img[0]}
-        style={styles.img}
-      />
-    </View>
+    <TouchableOpacity onPress={handleProductPress}>
+      <View style={styles.container}>
+        <Text style={styles.name}>{product.name}</Text>
+        <Image
+          alt={`Image of ${product.name}`}
+          source={product.img[0]}
+          style={styles.img}
+        />
+        <Text>{toPounds(product.price)}</Text>
+      </View>
+    </TouchableOpacity>
   );
 }
 
