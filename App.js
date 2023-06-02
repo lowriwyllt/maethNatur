@@ -80,29 +80,18 @@ export default function App() {
         }}
         drawerContent={(props) => <CustomDrawerContent {...props} />}
       >
-        <Drawer.Screen
-          name="Home"
-          component={() => <HomeScreen />}
-          inactiveBackgroundColor="white"
-        />
-        <Drawer.Screen
-          name="Products"
-          component={() => (
-            <AllProductsScreen queryParams={queryParamFromUrl} />
-          )}
-          inactiveBackgroundColor="white"
-        />
-        <Drawer.Screen
-          name="Information"
-          component={() => <InformationScreen />}
-          inactiveBackgroundColor="white"
-        />
-        <Drawer.Screen
-          name="SingleProduct"
-          component={() => (
-            <SingleProductScreen query={queryParamFromUrl?.query} />
-          )}
-        />
+        <Drawer.Screen name="Home" inactiveBackgroundColor="white">
+          {() => <HomeScreen />}
+        </Drawer.Screen>
+        <Drawer.Screen name="Products" inactiveBackgroundColor="white">
+          {() => <AllProductsScreen queryParams={queryParamFromUrl} />}
+        </Drawer.Screen>
+        <Drawer.Screen name="Information" inactiveBackgroundColor="white">
+          {() => <InformationScreen />}
+        </Drawer.Screen>
+        <Drawer.Screen name="SingleProduct">
+          {() => <SingleProductScreen query={queryParamFromUrl?.query} />}
+        </Drawer.Screen>
       </Drawer.Navigator>
     </NavigationContainer>
   );
